@@ -16,12 +16,26 @@ export default function Home() {
           quantities and cooking method.
         </p>
 
-        <div className="mt-10 flex gap-4">
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
           <a
             href="#recipes"
             className="rounded-full bg-yellow-500 px-8 py-3 font-semibold text-black"
           >
             Explore Recipes
+          </a>
+
+          <a
+            href="/login"
+            className="rounded-full bg-blue-600 px-8 py-3 font-semibold text-white"
+          >
+            Login
+          </a>
+
+          <a
+            href="/signup"
+            className="rounded-full bg-green-600 px-8 py-3 font-semibold text-white"
+          >
+            Sign Up
           </a>
         </div>
       </section>
@@ -120,9 +134,12 @@ export default function Home() {
           nutrition analysis and future AI tools.
         </p>
 
-        <button className="mt-8 rounded-full bg-yellow-500 px-10 py-4 font-bold text-black">
+        <a
+          href="/premium"
+          className="mt-8 inline-block rounded-full bg-yellow-500 px-10 py-4 font-bold text-black"
+        >
           Join Premium
-        </button>
+        </a>
       </section>
 
       {/* Features */}
@@ -158,7 +175,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="border-t border-gray-800 py-10 text-center text-gray-400">
         © 2026 Lord Aniketh Master Chef. All Rights Reserved.
       </footer>
