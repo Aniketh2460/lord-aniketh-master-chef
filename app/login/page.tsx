@@ -14,7 +14,7 @@ export default function LoginPage() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert("Login Successful");
-      router.push("/premium");
+      router.push("/profile");
     } catch (error: any) {
       alert(error.message);
     }

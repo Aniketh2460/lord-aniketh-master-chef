@@ -1,6 +1,25 @@
+"use client";
+
+import { useState } from "react";
 import { recipes } from "./data/recipes";
 
 export default function Home() {
+  const [search, setSearch] = useState("");
+const [category, setCategory] = useState("All");
+  const filteredRecipes = recipes.filter((recipe) => {
+  const matchesSearch =
+    recipe.name.toLowerCase().includes(search.toLowerCase()) ||
+    recipe.cuisine.toLowerCase().includes(search.toLowerCase()) ||
+    recipe.category.toLowerCase().includes(search.toLowerCase());
+
+  const matchesCategory =
+  category === "All" ||
+  recipe.category.toLowerCase() === category.toLowerCase() ||
+  recipe.type.toLowerCase() === category.toLowerCase();
+
+  return matchesSearch && matchesCategory;
+});
+
   return (
     <main className="min-h-screen bg-black text-white">
 
@@ -11,7 +30,7 @@ export default function Home() {
         </h1>
 
         <p className="mt-6 max-w-3xl text-xl text-gray-300">
-          Explore premium chef-crafted recipes from Lord Aniketh Master Chef.
+          Explore chef-crafted recipes from Lord Aniketh Master Chef.
           Click any recipe to open the complete PDF recipe with ingredients,
           quantities and cooking method.
         </p>
@@ -42,27 +61,78 @@ export default function Home() {
 
       {/* Recipe Collection */}
       <section id="recipes" className="px-8 py-20">
-        <h2 className="mb-12 text-center text-5xl font-bold text-yellow-400">
+        <h2 className="mb-6 text-center text-5xl font-bold text-yellow-400">
           Recipe Collection
         </h2>
+
+        <p className="text-center text-gray-400 mb-8">
+          {filteredRecipes.length} Recipes Found
+        </p>
 
         <div className="mb-10">
           <input
             type="text"
             placeholder="🔍 Search recipes..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="w-full rounded-xl border border-gray-700 bg-gray-900 p-4 text-white"
           />
         </div>
+        <div className="flex flex-wrap justify-center gap-3 mb-10">
+  <button
+    onClick={() => setCategory("All")}
+    className="bg-yellow-500 text-black px-4 py-2 rounded"
+  >
+    All
+  </button>
+
+  <button
+    onClick={() => setCategory("Biryani")}
+    className="bg-gray-800 px-4 py-2 rounded"
+  >
+    Biryani
+  </button>
+
+  <button
+    onClick={() => setCategory("Main Course")}
+    className="bg-gray-800 px-4 py-2 rounded"
+  >
+    Main Course
+  </button>
+
+  <button
+    onClick={() => setCategory("Starter")}
+    className="bg-gray-800 px-4 py-2 rounded"
+  >
+    Starter
+  </button>
+
+  <button
+    onClick={() => setCategory("Veg")}
+    className="bg-gray-800 px-4 py-2 rounded"
+  >
+    Veg
+  </button>
+
+  <button
+    onClick={() => setCategory("Non-Veg")}
+    className="bg-gray-800 px-4 py-2 rounded"
+  >
+    Non-Veg
+  </button>
+</div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {recipes.map((recipe) => (
+          {filteredRecipes.map((recipe) => (
             <a
               key={recipe.id}
               href={recipe.pdf}
               target="_blank"
               className="rounded-2xl border border-gray-800 bg-gray-950 p-6 transition hover:scale-105 hover:border-yellow-500"
             >
-              <h3 className="text-2xl font-bold">{recipe.name}</h3>
+              <h3 className="text-2xl font-bold">
+                {recipe.name}
+              </h3>
 
               <p className="mt-2 text-yellow-400">
                 {recipe.category}
