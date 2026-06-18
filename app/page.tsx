@@ -68,6 +68,39 @@ const [category, setCategory] = useState("All");
         <p className="text-center text-gray-400 mb-8">
           {filteredRecipes.length} Recipes Found
         </p>
+        <div className="grid gap-4 md:grid-cols-3 mb-10">
+
+  <div className="bg-gray-900 rounded-xl p-6 text-center">
+    <h3 className="text-gray-400 mb-2">
+      Total Recipes
+    </h3>
+
+    <p className="text-4xl font-bold text-yellow-400">
+      {recipes.length}
+    </p>
+  </div>
+
+  <div className="bg-gray-900 rounded-xl p-6 text-center">
+    <h3 className="text-gray-400 mb-2">
+      Veg Recipes
+    </h3>
+
+    <p className="text-4xl font-bold text-green-400">
+      {recipes.filter(r => r.type === "Veg").length}
+    </p>
+  </div>
+
+  <div className="bg-gray-900 rounded-xl p-6 text-center">
+    <h3 className="text-gray-400 mb-2">
+      Non-Veg Recipes
+    </h3>
+
+    <p className="text-4xl font-bold text-red-400">
+      {recipes.filter(r => r.type === "Non-Veg").length}
+    </p>
+  </div>
+
+</div>
 
         <div className="mb-10">
           <input
