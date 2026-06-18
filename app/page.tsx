@@ -1,11 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { auth } from "./firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import { recipes } from "./data/recipes";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState("All");
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setLoggedIn(!!user);
+    });
+
+    return () => unsubscribe();
+  }, []);
   const filteredRecipes = recipes.filter((recipe) => {
   const matchesSearch =
     recipe.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -58,6 +69,9 @@ const [category, setCategory] = useState("All");
           </a>
         </div>
       </section>
+{loggedIn && (
+ <>
+{/* Recipe Collection */}
 
       {/* Recipe Collection */}
       <section id="recipes" className="px-8 py-20">
@@ -200,15 +214,37 @@ const [category, setCategory] = useState("All");
         </h2>
 
         <div className="mx-auto mt-10 max-w-3xl">
-          <textarea
-            placeholder="Ask AI anything... Example: How do I make Hyderabadi Biryani for 10 people?"
-            className="h-40 w-full rounded-xl border border-gray-700 bg-black p-4 text-white"
-          />
 
-          <button className="mt-4 rounded-full bg-yellow-500 px-8 py-3 font-bold text-black">
-            Ask AI Chef
-          </button>
-        </div>
+  <textarea
+    placeholder="Example: Create a high-protein chicken recipe under 500 calories"
+    className="h-40 w-full rounded-xl border border-gray-700 bg-black p-4 text-white"
+  />
+
+  <div className="mt-4 flex flex-wrap gap-3">
+    <button className="rounded-full bg-yellow-500 px-6 py-3 font-bold text-black">
+      🍗 Generate Recipe
+    </button>
+
+    <button className="rounded-full bg-green-600 px-6 py-3 font-bold">
+      🥗 Nutrition Analysis
+    </button>
+
+    <button className="rounded-full bg-blue-600 px-6 py-3 font-bold">
+      📅 Meal Plan
+    </button>
+  </div>
+
+  <div className="mt-6 rounded-xl bg-black p-6 border border-gray-700">
+    <h3 className="text-xl font-bold text-yellow-400 mb-3">
+      AI Response
+    </h3>
+
+    <p className="text-gray-300">
+      Your AI-generated recipe will appear here.
+    </p>
+  </div>
+
+</div>
       </section>
 
       {/* AI Meal Planner */}
@@ -281,6 +317,9 @@ const [category, setCategory] = useState("All");
       <footer className="border-t border-gray-800 py-10 text-center text-gray-400">
         © 2026 Lord Aniketh Master Chef. All Rights Reserved.
       </footer>
+
+      </>
+    )}
 
     </main>
   );
