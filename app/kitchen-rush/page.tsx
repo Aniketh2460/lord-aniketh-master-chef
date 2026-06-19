@@ -565,7 +565,15 @@ export default function KitchenRushPage() {
         />
       ))}
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-3 pb-8 pt-4 sm:px-5 lg:px-8">
-        <header className="mb-4 flex flex-col gap-3 rounded-3xl border border-amber-400/10 bg-slate-900/70 p-4 shadow-2xl shadow-amber-500/5 backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
+
+  <a
+    href="/"
+    className="mb-4 inline-block w-fit rounded-2xl bg-blue-600 px-5 py-3 font-semibold text-white hover:bg-blue-700"
+  >
+    ← Back to Home
+  </a>
+
+  <header className="mb-4 flex flex-col gap-3 rounded-3xl border border-amber-400/10 bg-slate-900/70 p-4 shadow-2xl shadow-amber-500/5 backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.45em] text-amber-300/80">Kitchen Rush</p>
             <h1 className="mt-1 text-2xl font-semibold text-white">Lord Aniketh Master Chef</h1>
