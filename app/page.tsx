@@ -67,6 +67,12 @@ export default function Home() {
           >
             Sign Up
           </a>
+          <a
+  href="/kitchen-rush"
+  className="rounded-full bg-red-600 px-8 py-3 font-semibold text-white"
+>
+  🎮 Kitchen Rush
+</a>
         </div>
       </section>
 {loggedIn && (
@@ -280,7 +286,23 @@ export default function Home() {
           Join Premium
         </a>
       </section>
+{/* Kitchen Rush Game */}
+<section className="bg-black px-8 py-20 text-center">
+  <h2 className="text-5xl font-bold text-yellow-400">
+    Kitchen Rush Game
+  </h2>
 
+  <p className="mt-6 text-gray-300">
+    Play the ultimate cooking challenge and become a Master Chef.
+  </p>
+
+  <a
+    href="/kitchen-rush"
+    className="mt-8 inline-block rounded-full bg-red-600 px-10 py-4 font-bold text-white hover:scale-105 transition"
+  >
+    🍳 Play Kitchen Rush
+  </a>
+</section>
       {/* Features */}
       <section className="px-8 py-20">
         <h2 className="mb-12 text-center text-5xl font-bold text-yellow-400">
